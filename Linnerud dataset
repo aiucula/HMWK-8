@@ -1,9 +1,10 @@
 from sklearn import datasets
+import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt  # To visualize
 import pandas as pd  # To read data
 
-​
+
 from sklearn.datasets import load_linnerud
 linner = load_linnerud()
  
@@ -16,16 +17,14 @@ print(linner.data.shape)
 
 
 
-# to plot the first column of features with first column of targets.....
 plt.scatter(linner.data[:, 0], linner.target[:, 0])
- 
+
 #To label the axis and Title
 plt.xlabel(linner.feature_names[0])
 plt.ylabel(linner.target_names[0])
 plt.title("{0} x {1}".format(linner.feature_names[0],linner.target_names[0]))
 plt.show()
 
-# to plot the first column of features with second column of targets.....
 plt.scatter(linner.data[:, 0], linner.target[:, 1])
 
 #To label the axis and Title
@@ -34,7 +33,6 @@ plt.ylabel(linner.target_names[1])
 plt.title("{0} x {1}".format(linner.feature_names[0],linner.target_names[1]))
 plt.show()
 
-# to plot the first column of features with third column of targets.....
 plt.scatter(linner.data[:, 0], linner.target[:, 2])
 
 #To label the axis and Title
@@ -44,8 +42,7 @@ plt.title("{0} x {1}".format(linner.feature_names[0],linner.target_names[2]))
 plt.show()
 
 
-# to plot the Seond column of features with first column of targets.....
-plt.scatter(linner.data[:, 1], linner.target[:, 0])
+plt.scatter(linner.data[:, 1], linner.target[:, 1])
 
 #To label the axis and Title
 plt.xlabel(linner.feature_names[1])
@@ -97,4 +94,44 @@ plt.scatter(linner.data[:, 2], linner.target[:, 2])
 plt.xlabel(linner.feature_names[2])
 plt.ylabel(linner.target_names[2])
 plt.title("{0} x {1}".format(linner.feature_names[2],linner.target_names[2]))
+plt.show()
+
+# to compare exercise variables
+plt.scatter(linner.data[:, 0], linner.data[:, 1])
+
+#To label the axis and Title
+plt.xlabel(linner.feature_names[0])
+plt.ylabel(linner.feature_names[1])
+plt.title("{0} x {1}".format(linner.feature_names[0],linner.feature_names[1]))
+plt.show()
+
+
+# to compare exercise variables
+plt.scatter(linner.data[:, 0], linner.data[:, 2])
+
+#To label the axis and Title
+plt.xlabel(linner.feature_names[0])
+plt.ylabel(linner.feature_names[2])
+plt.title("{0} x {1}".format(linner.feature_names[0],linner.feature_names[2]))
+plt.show()
+
+# to compare exercise variables
+plt.scatter(linner.data[:, 1], linner.data[:, 2])
+
+#To label the axis and Title
+plt.xlabel(linner.feature_names[1])
+plt.ylabel(linner.feature_names[2])
+plt.title("{0} x {1}".format(linner.feature_names[1],linner.feature_names[2]))
+plt.show()
+
+#attempt at a fancy plot
+
+sns.set_style("white")
+gridobj = sns.lmplot(x=linner.feature_names[0], y=linner.feature_names[1], hue="cyl", data=linner.data, 
+                     height=7, aspect=1.6, robust=True, palette='tab10', 
+                     scatter_kws=dict(s=60, linewidths=.7, edgecolors='black'))
+
+# Decorations
+gridobj.set(xlim=(0,100), ylim=(0, 100))
+plt.title("Scatterplot with line of best fit grouped by number of cylinders", fontsize=20)
 plt.show()
